@@ -4,8 +4,10 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Toast;
@@ -30,16 +32,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setOnCheckbox() {
-        if (ckOne.isChecked()){
-            ckTwo.setChecked(false);
-            ckThree.setChecked(false);
-        }else if (ckTwo.isChecked()){
-            ckOne.setChecked(false);
-            ckThree.setChecked(false);
-        }else if (ckThree.isChecked()){
-            ckOne.setChecked(false);
-            ckTwo.setChecked(false);
-        }
+        ckOne.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    ckTwo.setChecked(false);
+                    ckThree.setChecked(false);
+                }
+            }
+        });
+        ckTwo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    ckOne.setChecked(false);
+                    ckThree.setChecked(false);
+                }
+            }
+        });
+        ckThree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    ckOne.setChecked(false);
+                    ckTwo.setChecked(false);
+                }
+            }
+        });
     }
 
     private void eventClick() {
