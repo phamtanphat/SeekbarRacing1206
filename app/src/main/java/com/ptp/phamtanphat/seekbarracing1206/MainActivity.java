@@ -26,27 +26,27 @@ public class MainActivity extends AppCompatActivity {
 
         anhxa();
         eventClick();
+        setOnCheckbox();
+    }
+
+    private void setOnCheckbox() {
+        if (ckOne.isChecked()){
+            ckTwo.setChecked(false);
+            ckThree.setChecked(false);
+        }else if (ckTwo.isChecked()){
+            ckOne.setChecked(false);
+            ckThree.setChecked(false);
+        }else if (ckThree.isChecked()){
+            ckOne.setChecked(false);
+            ckTwo.setChecked(false);
+        }
     }
 
     private void eventClick() {
         imgPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                CountDownTimer countDownTimer = new CountDownTimer(60000, 500) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-
-
-
-                    }
-
-                    @Override
-                    public void onFinish() {
-
-                    }
-                };
-                countDownTimer.start();
+                imgPlay.setEnabled(false);
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -62,12 +62,15 @@ public class MainActivity extends AppCompatActivity {
                         if (skOne.getProgress() >= 100) {
                             Toast.makeText(MainActivity.this, "One Chien Thang", Toast.LENGTH_SHORT).show();
                             handler.removeCallbacks(this);
+                            imgPlay.setEnabled(true);
                         } else if (skTwo.getProgress() >= 100) {
                             Toast.makeText(MainActivity.this, "Two Chien Thang", Toast.LENGTH_SHORT).show();
                             handler.removeCallbacks(this);
+                            imgPlay.setEnabled(true);
                         } else if (skThree.getProgress() >= 100) {
                             Toast.makeText(MainActivity.this, "Three Chien Thang", Toast.LENGTH_SHORT).show();
                             handler.removeCallbacks(this);
+                            imgPlay.setEnabled(true);
                         }else {
                             handler.postDelayed(this,500);
                         }
