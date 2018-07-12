@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
                         skOne.setProgress(skOne.getProgress() + randomOne);
                         skTwo.setProgress(skTwo.getProgress() + randomTwo);
                         skThree.setProgress(skThree.getProgress() + randomThree);
+
                     }
 
                     @Override
