@@ -1,12 +1,14 @@
 package com.ptp.phamtanphat.seekbarracing1206;
 
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -30,17 +32,12 @@ public class MainActivity extends AppCompatActivity {
         imgPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 CountDownTimer countDownTimer = new CountDownTimer(60000, 500) {
                     @Override
                     public void onTick(long millisUntilFinished) {
 
-                        int randomOne = random.nextInt(10) + 1;
-                        int randomTwo = random.nextInt(10) + 1;
-                        int randomThree = random.nextInt(10) + 1;
 
-                        skOne.setProgress(skOne.getProgress() + randomOne);
-                        skTwo.setProgress(skTwo.getProgress() + randomTwo);
-                        skThree.setProgress(skThree.getProgress() + randomThree);
 
                     }
 
@@ -50,7 +47,32 @@ public class MainActivity extends AppCompatActivity {
                     }
                 };
                 countDownTimer.start();
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        int randomOne = random.nextInt(10) + 1;
+                        int randomTwo = random.nextInt(10) + 1;
+                        int randomThree = random.nextInt(10) + 1;
 
+                        skOne.setProgress(skOne.getProgress() + randomOne);
+                        skTwo.setProgress(skTwo.getProgress() + randomTwo);
+                        skThree.setProgress(skThree.getProgress() + randomThree);
+
+                        if (skOne.getProgress() >= 100) {
+                            Toast.makeText(MainActivity.this, "One Chien Thang", Toast.LENGTH_SHORT).show();
+                            handler.removeCallbacks(this);
+                        } else if (skTwo.getProgress() >= 100) {
+                            Toast.makeText(MainActivity.this, "Two Chien Thang", Toast.LENGTH_SHORT).show();
+                            handler.removeCallbacks(this);
+                        } else if (skThree.getProgress() >= 100) {
+                            Toast.makeText(MainActivity.this, "Three Chien Thang", Toast.LENGTH_SHORT).show();
+                            handler.removeCallbacks(this);
+                        }else {
+                            handler.postDelayed(this,500);
+                        }
+                    }
+                },500);
             }
         });
     }
