@@ -85,14 +85,35 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, "One Chien Thang", Toast.LENGTH_SHORT).show();
                                 handler.removeCallbacks(this);
                                 imgPlay.setEnabled(true);
+                                try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                setCheckBox();
+                                setSeekbar();
                             } else if (skTwo.getProgress() >= 100) {
                                 Toast.makeText(MainActivity.this, "Two Chien Thang", Toast.LENGTH_SHORT).show();
                                 handler.removeCallbacks(this);
                                 imgPlay.setEnabled(true);
+                                try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                setCheckBox();
+                                setSeekbar();
                             } else if (skThree.getProgress() >= 100) {
                                 Toast.makeText(MainActivity.this, "Three Chien Thang", Toast.LENGTH_SHORT).show();
                                 handler.removeCallbacks(this);
                                 imgPlay.setEnabled(true);
+                                try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                setCheckBox();
+                                setSeekbar();
                             } else {
                                 handler.postDelayed(this, 500);
                             }
@@ -114,5 +135,15 @@ public class MainActivity extends AppCompatActivity {
         skTwo = findViewById(R.id.seekbarTwo);
         skThree = findViewById(R.id.seekbarThree);
         imgPlay = findViewById(R.id.imageviewPlay);
+    }
+    public void setCheckBox(){
+        ckOne.setChecked(false);
+        ckTwo.setChecked(false);
+        ckThree.setChecked(false);
+    }
+    public void setSeekbar(){
+        skOne.setProgress(0);
+        skTwo.setProgress(0);
+        skThree.setProgress(0);
     }
 }
