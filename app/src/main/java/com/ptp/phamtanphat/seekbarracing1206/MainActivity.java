@@ -27,15 +27,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         anhxa();
-        eventClick();
         setOnCheckbox();
+        eventClick();
+
     }
 
     private void setOnCheckbox() {
         ckOne.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     ckTwo.setChecked(false);
                     ckThree.setChecked(false);
                 }
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         ckTwo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     ckOne.setChecked(false);
                     ckThree.setChecked(false);
                 }
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         ckThree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     ckOne.setChecked(false);
                     ckTwo.setChecked(false);
                 }
@@ -62,41 +63,47 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void eventClick() {
+
         imgPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imgPlay.setEnabled(false);
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        int randomOne = random.nextInt(10) + 1;
-                        int randomTwo = random.nextInt(10) + 1;
-                        int randomThree = random.nextInt(10) + 1;
+                if (ckOne.isChecked() || ckTwo.isChecked() || ckThree.isChecked()) {
+                    imgPlay.setEnabled(false);
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            int randomOne = random.nextInt(10) + 1;
+                            int randomTwo = random.nextInt(10) + 1;
+                            int randomThree = random.nextInt(10) + 1;
 
-                        skOne.setProgress(skOne.getProgress() + randomOne);
-                        skTwo.setProgress(skTwo.getProgress() + randomTwo);
-                        skThree.setProgress(skThree.getProgress() + randomThree);
+                            skOne.setProgress(skOne.getProgress() + randomOne);
+                            skTwo.setProgress(skTwo.getProgress() + randomTwo);
+                            skThree.setProgress(skThree.getProgress() + randomThree);
 
-                        if (skOne.getProgress() >= 100) {
-                            Toast.makeText(MainActivity.this, "One Chien Thang", Toast.LENGTH_SHORT).show();
-                            handler.removeCallbacks(this);
-                            imgPlay.setEnabled(true);
-                        } else if (skTwo.getProgress() >= 100) {
-                            Toast.makeText(MainActivity.this, "Two Chien Thang", Toast.LENGTH_SHORT).show();
-                            handler.removeCallbacks(this);
-                            imgPlay.setEnabled(true);
-                        } else if (skThree.getProgress() >= 100) {
-                            Toast.makeText(MainActivity.this, "Three Chien Thang", Toast.LENGTH_SHORT).show();
-                            handler.removeCallbacks(this);
-                            imgPlay.setEnabled(true);
-                        }else {
-                            handler.postDelayed(this,500);
+                            if (skOne.getProgress() >= 100) {
+                                Toast.makeText(MainActivity.this, "One Chien Thang", Toast.LENGTH_SHORT).show();
+                                handler.removeCallbacks(this);
+                                imgPlay.setEnabled(true);
+                            } else if (skTwo.getProgress() >= 100) {
+                                Toast.makeText(MainActivity.this, "Two Chien Thang", Toast.LENGTH_SHORT).show();
+                                handler.removeCallbacks(this);
+                                imgPlay.setEnabled(true);
+                            } else if (skThree.getProgress() >= 100) {
+                                Toast.makeText(MainActivity.this, "Three Chien Thang", Toast.LENGTH_SHORT).show();
+                                handler.removeCallbacks(this);
+                                imgPlay.setEnabled(true);
+                            } else {
+                                handler.postDelayed(this, 500);
+                            }
                         }
-                    }
-                },500);
+                    }, 500);
+                } else {
+                    Toast.makeText(MainActivity.this, "Bạn phải chọn 1 con vật", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
     }
 
     private void anhxa() {
